@@ -227,29 +227,34 @@ def handle_message(ws, message):
         log.error("Unable to parse message")
         return
 
-#    try:
-    if "e" not in messageData:
-        log.error("Malformed Message")
-    event = messageData["e"]
-    data = messageData["d"]
-
-    if event == "BUTTON_COMMAND":
-        on_handle_command(data)
-       # handle_command(data)
-
-    elif event == "MESSAGE_RECEIVED":
-        if data['channel_id'] == networking.channel_id:
-            if data['type'] != "robot":
-               on_handle_chat_message(data)
-
-    elif event == "ROBOT_VALIDATED":
-        networking.handleConnectChatChannel(data["host"])
-
-    else:
-        log.error("Unknown event type")
-
-#    except Exception as e:
-#        print(e)
+    try:
+        if "e" not in messageData:
+            log.error("Malformed Message")
+            print("Malfored Message")
+        print(messageData)
+        event = messageData["e"]
+        data = messageData["d"]
+    
+        if event == "BUTTON_COMMAND":
+            on_handle_command(data)
+            print("button pressed")
+           # handle_command(data)
+    
+        elif event == "MESSAGE_RECEIVED":
+            if data['channel_id'] == networking.channel_id:
+                if data['type'] != "robot":
+                   on_handle_chat_message(data)
+    
+        elif event == "ROBOT_VALIDATED":
+            networking.handleConnectChatChannel(data["host"])
+            print("Robot Validated")
+    
+        else:
+            log.error("Unknown event type")
+            print("Unknown Event")
+    
+    except Exception as e:
+        print(e)
 
 def handle_chat_message(args):
     log.info("chat message received: %s", args)

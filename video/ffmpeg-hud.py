@@ -19,7 +19,7 @@ import networking
 
 log = logging.getLogger('RemoTV.video.ffmpeg-hud')
 
-hud_correct = False
+hud_correct = True
 hud_correct_x = 0
 hud_correct_y = 0
 

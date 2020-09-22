@@ -72,6 +72,8 @@ def move(args):
             motors(0,0)
             print("R")
             return
+        elif command == 'w':
+            rvr.wake()
     except:
         import traceback
         print(traceback.format_exec())
